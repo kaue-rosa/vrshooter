@@ -48,7 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
-     <Compile Include="Assets\Scripts\PlayerMotor.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\PlayerMotor\AccelPlayerMotor.cs" />
+     <Compile Include="Assets\Scripts\PlayerMotor\MousePlayerMotor.cs" />
+     <Compile Include="Assets\Scripts\PlayerMotor\PlayerMotor.cs" />
+     <Compile Include="Assets\Scripts\PlayerMotor\TouchPlayerMotor.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />

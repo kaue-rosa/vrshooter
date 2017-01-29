@@ -1,25 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMotor : MonoBehaviour {
+public class MousePlayerMotor : PlayerMotor {
 
 	private Vector2 _mouseAbsolute;
 	private Vector2 _smoothMouse;
+	private Transform transform;
 
-	[SerializeField] private Vector2 clampInDegrees = new Vector2(360, 180);
-	[SerializeField] private bool lockCursor;
-	[SerializeField] private Vector2 sensitivity = new Vector2(2, 2);
-	[SerializeField] private Vector2 smoothing = new Vector2(3, 3);
-	[SerializeField] private Vector2 targetDirection;
-	[SerializeField] private Vector2 targetCharacterDirection;
+	private Vector2 clampInDegrees = new Vector2(360, 180);
+	private bool lockCursor;
+	private Vector2 sensitivity = new Vector2(2, 2);
+	private Vector2 smoothing = new Vector2(3, 3);
+	private Vector2 targetDirection;
+	private Vector2 targetCharacterDirection;
 
-	void Start() {
+	void PlayerMotor.Init(Transform playerTransform) {
+		transform = playerTransform;
 		// Set target direction to the camera's initial orientation.
 		targetDirection = transform.localRotation.eulerAngles;
 	}
 
-	void Update() {
+	void PlayerMotor.Update() {
 		// Ensure the cursor is always locked when set
 		//Cursor.lockState = CursorLockMode.Locked;//.lockCursor = lockCursor;
 
@@ -57,36 +57,5 @@ public class PlayerMotor : MonoBehaviour {
 		Quaternion yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
 		transform.localRotation *= yRotation;
 	}
-
-
-
-	/*
-	public float sensitivityX = 5.0f;
-	public float sensitivityY = 5.0f;
-
-	public bool invertX = false;
-	public bool invertY = false;
-
-	// Use this for initialization
-	void Start () {
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if (Input.touches.Length > 0)
-		{
-			if (Input.touches[0].phase == TouchPhase.Moved)
-			{
-				Vector2 delta = Input.touches[0].deltaPosition;
-				float rotationZ = delta.x * sensitivityX * Time.deltaTime;
-				rotationZ = invertX ? rotationZ : rotationZ * -1;
-				float rotationX = delta.y * sensitivityY * Time.deltaTime;
-				rotationX = invertY ? rotationX : rotationX * -1;
-
-				transform.localEulerAngles += new Vector3(rotationX, rotationZ, 0);
-			}
-		}
-	}
-	*/
 }
+
