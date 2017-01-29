@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	private PlayerMotor playerMotor = new MousePlayerMotor();
+	private PlayerMotor playerMotor = new AccelPlayerMotor();
 
 	void Start () {
 		playerMotor.Init (transform);

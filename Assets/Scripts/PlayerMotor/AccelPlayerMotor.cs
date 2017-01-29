@@ -4,31 +4,19 @@ public class AccelPlayerMotor : PlayerMotor {
 
 	private Transform transform;
 
-	private float sensitivityX = 5.0f;
-	private float sensitivityY = 5.0f;
+	private Quaternion gyroInitialRotation = Quaternion.identity;
+	private Quaternion initialRotation = Quaternion.identity;
 
-	private bool invertX = false;
-	private bool invertY = false;
-
-	// Use this for initialization
 	void PlayerMotor.Init (Transform playerTransform) {
 		transform = playerTransform;
+
+		initialRotation = transform.rotation; 
+		gyroInitialRotation = Input.gyro.attitude;
 	}
 
-	// Update is called once per frame
 	void PlayerMotor.Update () {
-		if (Input.touches.Length > 0)
-		{
-			if (Input.touches[0].phase == TouchPhase.Moved)
-			{
-				Vector2 delta = Input.touches[0].deltaPosition;
-				float rotationZ = delta.x * sensitivityX * Time.deltaTime;
-				rotationZ = invertX ? rotationZ : rotationZ * -1;
-				float rotationX = delta.y * sensitivityY * Time.deltaTime;
-				rotationX = invertY ? rotationX : rotationX * -1;
-
-				transform.localEulerAngles += new Vector3(rotationX, rotationZ, 0);
-			}
-		}
+		Quaternion offsetRotation = Quaternion.Inverse(gyroInitialRotation) * Input.gyro.attitude;
+		transform.rotation = initialRotation * offsetRotation;
 	}
+
 }
