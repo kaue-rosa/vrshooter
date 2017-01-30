@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-#if	UNITY_IPHONE
-	private PlayerMotor playerMotor = new GyroPlayerMotor();
-#else
-	private PlayerMotor playerMotor = new MousePlayerMotor();
-#endif
+	private PlayerMotor playerMotor;
+	private Dictionary<MotorType, PlayerMotor> motors = new Dictionary<MotorType, PlayerMotor> {
+		{MotorType.MOUSE , new MousePlayerMotor()},
+		{MotorType.TOUCH, new TouchPlayerMotor()},
+		{MotorType.GYRO, new GyroPlayerMotor()}
+	};
 
 	void Start () {
+		motors.TryGetValue(GameSettings.GetInstance ().GetActiveMotorType (), out playerMotor);
+		//motors.TryGetValue(MotorType.GYRO, out playerMotor);
 		playerMotor.Init (transform);
 	}
 

@@ -14,4 +14,8 @@ public class Game : MonoBehaviour {
 	public void EnterSRange() {
 		SceneManager.LoadScene ("srange");
 	}
+
+	public void SetSettingsMotorType(int motorType) {
+		GameSettings.GetInstance().SetMotorType(motorType);
+	}
 }
