@@ -21,6 +21,15 @@ public class GyroPlayerMotor : PlayerMotor {
 	void PlayerMotor.Update () {
 		Quaternion offsetRotation = Quaternion.Inverse(gyroInitialRotation) * Input.gyro.attitude;
 
+		if (invert) {
+			Vector3 inverted = new Vector3 (
+				offsetRotation.eulerAngles.x * -1,
+				offsetRotation.eulerAngles.y * -1,
+				offsetRotation.eulerAngles.z
+			);
+			offsetRotation = Quaternion.Euler (inverted);
+		}
+
 		transform.rotation = initialRotation * offsetRotation;
 	}
 
