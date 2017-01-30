@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	private PlayerMotor playerMotor = new AccelPlayerMotor();
+#if	UNITY_IPHONE
+	private PlayerMotor playerMotor = new GyroPlayerMotor();
+#else
+	private PlayerMotor playerMotor = new MousePlayerMotor();
+#endif
 
 	void Start () {
 		playerMotor.Init (transform);
