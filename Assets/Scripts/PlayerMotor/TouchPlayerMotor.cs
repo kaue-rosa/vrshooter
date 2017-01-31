@@ -6,11 +6,11 @@ public class TouchPlayerMotor : PlayerMotor {
 
 	private Transform transform;
 
-	private float sensitivityX = 30.0f;
-	private float sensitivityY = 30.0f;
+	private float sensitivityX = 5.0f;
+	private float sensitivityY = 5.0f;
 
-	private bool invertX = false;
-	private bool invertY = true;
+	private bool invertX = true;
+	private bool invertY = false;
 
 	void PlayerMotor.Init (Transform playerTransform) {
 		transform = playerTransform;
