@@ -13,11 +13,18 @@ public class Player : MonoBehaviour {
 
 	void Start () {
 		motors.TryGetValue(GameSettings.GetInstance ().GetActiveMotorType (), out playerMotor);
-		//motors.TryGetValue(MotorType.GYRO, out playerMotor);
 		playerMotor.Init (transform);
 	}
 
 	void Update () {
 		playerMotor.Update ();
+
+		Vector3 fwd = transform.TransformDirection(Vector3.forward);
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position,fwd,out hit)) {
+			if (hit.collider.tag == "Target") {
+				Destroy (hit.collider.gameObject);
+			}
+		}
 	}
 }
